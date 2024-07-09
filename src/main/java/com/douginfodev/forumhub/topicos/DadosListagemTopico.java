@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public record DadosListagemTopico(
 
+        Integer id,
         @NotBlank String titulo,
         @NotBlank String mensagem,
         @NotBlank String datatopico,
@@ -12,7 +13,7 @@ public record DadosListagemTopico(
         @NotBlank Integer curso) {
 
         public DadosListagemTopico(Topico topico){
-          this(topico.getTitulo(),topico.getMensagem(),topico.getDatatopico(),topico.getStatustopico(),topico.getAutor(),topico.getCurso());
+          this(topico.getId(),topico.getTitulo(),topico.getMensagem(),topico.getDatatopico(),topico.getStatustopico(),topico.getAutor(),topico.getCurso());
         }
 
 }

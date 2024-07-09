@@ -39,5 +39,17 @@ public class Topico {
         this.respostas = dados.respostas();
     }
 
+    public void atualizarTopico(DadosAtualizacaoTopico dados){
+        this.titulo = dados.titulo();
+        
+        if(dados.mensagem() != null){
+         this.mensagem = dados.mensagem();
+        }
+        
+        this.datatopico = dados.datatopico();
+        this.statustopico = dados.statustopico();
+        this.autor = dados.autor();
+    }
+
 
 }
