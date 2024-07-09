@@ -9,6 +9,9 @@ import com.douginfodev.forumhub.repository.TopicoRepository;
 import com.douginfodev.forumhub.topicos.DadosTopico;
 import com.douginfodev.forumhub.topicos.Topico;
 
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -25,7 +28,8 @@ public class TopicoController {
     }
 
     @PostMapping
-    public void Insert(@RequestBody DadosTopico dados){
+    @Transactional
+    public void Insert(@RequestBody @Valid DadosTopico dados){
         repository.save(new Topico(dados));
     }
 

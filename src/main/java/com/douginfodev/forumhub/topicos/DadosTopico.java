@@ -1,5 +1,23 @@
 package com.douginfodev.forumhub.topicos;
 
-public record DadosTopico(Integer id, String titulo, String mensagem, String data, String status, String autor,Integer curso, String respostas) {
+import jakarta.validation.constraints.NotBlank;
+
+public record DadosTopico(
+    Integer id, 
+
+    @NotBlank
+    String titulo, 
+    @NotBlank
+    String mensagem, 
+    @NotBlank
+    String datatopico, 
+    @NotBlank
+    String statustopico,
+    @NotBlank 
+    String autor,
+    @NotBlank
+    Integer curso, 
+    @NotBlank
+    String respostas) {
 
 }

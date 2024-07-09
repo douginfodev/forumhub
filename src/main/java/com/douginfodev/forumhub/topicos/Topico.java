@@ -23,8 +23,8 @@ public class Topico {
    
     private String titulo;
     private String mensagem;
-    private String data;
-    private String status;
+    private String datatopico;
+    private String statustopico;
     private String autor;
     private Integer curso;
     private String respostas;
@@ -32,8 +32,8 @@ public class Topico {
     public Topico(DadosTopico dados){
         this.titulo = dados.titulo();
         this.mensagem = dados.mensagem();
-        this.data = dados.data();
-        this.status = dados.status();
+        this.datatopico = dados.datatopico();
+        this.statustopico = dados.statustopico();
         this.autor = dados.autor();
         this.curso = dados.curso();
         this.respostas = dados.respostas();
