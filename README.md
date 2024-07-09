@@ -30,6 +30,11 @@ spring.datasource.password=root
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.HSQLDialect
 
+traduzir os parametros da paginacao
+spring.data.web.pageable.page-parameter=pagina
+spring.data.web.pageable.size-parameter=tamanho
+spring.data.web.sort.sort-parameter=ordem
+
 create table topicos{
   id int(11) not null auto_increment,
   titulo varchar(100) not null,
