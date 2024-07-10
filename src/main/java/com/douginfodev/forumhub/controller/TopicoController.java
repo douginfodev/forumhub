@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,18 +24,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/topico")
+@RequestMapping("/topicos")
 public class TopicoController {
 
     @Autowired
     private TopicoRepository repository;
-
-    /*
-     * @GetMapping
-     * public String getAll(){
-     * return "OLA MUNDO";
-     * }
-     */
 
     @PostMapping
     @Transactional
@@ -41,7 +36,7 @@ public class TopicoController {
         repository.save(new Topico(dados));
     }
 
-    // 08000555090 *topico?sort=titulo,desc&size=10&page=0
+    //topicos?sort=titulo,desc&size=10&page=0
     @GetMapping
     public Page<DadosListagemTopico> ListAll(@PageableDefault(size = 10, sort = { "datatopico" }) Pageable paginacao) {
         return repository.findAll(paginacao).map(DadosListagemTopico::new);
@@ -52,6 +47,12 @@ public class TopicoController {
     public void Update(@RequestBody @Valid DadosAtualizacaoTopico dados) {
        var topico = repository.getReferenceById(dados.id());
        topico.atualizarTopico(dados);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void Delete(@PathVariable Integer id) {
+       repository.deleteById(id);
     }
 
 }
