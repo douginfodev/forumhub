@@ -4,14 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.douginfodev.forumhub.repository.TopicoRepository;
 import com.douginfodev.forumhub.topicos.DadosAtualizacaoTopico;
+import com.douginfodev.forumhub.topicos.DadosDetailsTopico;
 import com.douginfodev.forumhub.topicos.DadosListagemTopico;
 import com.douginfodev.forumhub.topicos.DadosTopico;
 import com.douginfodev.forumhub.topicos.Topico;
@@ -32,27 +35,45 @@ public class TopicoController {
 
     @PostMapping
     @Transactional
-    public void Insert(@RequestBody @Valid DadosTopico dados) {
-        repository.save(new Topico(dados));
+    public ResponseEntity Insert(@RequestBody @Valid DadosTopico dados, UriComponentsBuilder uriBuilder) {
+       var topico = new Topico(dados);
+       repository.save(topico);
+
+        var uri = uriBuilder.path("/topico/{id}").buildAndExpand(topico.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosDetailsTopico(topico));
     }
 
     //topicos?sort=titulo,desc&size=10&page=0
     @GetMapping
-    public Page<DadosListagemTopico> ListAll(@PageableDefault(size = 10, sort = { "datatopico" }) Pageable paginacao) {
-        return repository.findAll(paginacao).map(DadosListagemTopico::new);
+    public ResponseEntity<Page<DadosListagemTopico>> ListAll(@PageableDefault(size = 10, sort = { "datatopico" }) Pageable paginacao) {
+        var pageDados = repository.findAll(paginacao).map(DadosListagemTopico::new);
+        return  ResponseEntity.ok(pageDados);
     }
 
     @PutMapping
     @Transactional
-    public void Update(@RequestBody @Valid DadosAtualizacaoTopico dados) {
+    public ResponseEntity Update(@RequestBody @Valid DadosAtualizacaoTopico dados) {
        var topico = repository.getReferenceById(dados.id());
        topico.atualizarTopico(dados);
+
+       return ResponseEntity.ok(new DadosDetailsTopico(topico));
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void Delete(@PathVariable Integer id) {
+    public ResponseEntity Delete(@PathVariable Integer id) {
        repository.deleteById(id);
+
+       return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity details(@PathVariable Integer id) {
+       var topico = repository.getReferenceById(id);
+
+       return ResponseEntity.ok(new DadosDetailsTopico(topico));
+   
     }
 
 }
