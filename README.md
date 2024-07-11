@@ -35,6 +35,8 @@ spring.data.web.pageable.page-parameter=pagina
 spring.data.web.pageable.size-parameter=tamanho
 spring.data.web.sort.sort-parameter=ordem
 
+server.error.include-stacktrace=never
+
 create table topicos{
   id int(11) not null auto_increment,
   titulo varchar(100) not null,
