@@ -1,6 +1,7 @@
-package com.douginfodev.forumhub.topicos;
+package com.douginfodev.forumhub.domain.topicos;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record DadosTopico(
     Integer id, 
@@ -15,7 +16,8 @@ public record DadosTopico(
     String statustopico,
     @NotBlank 
     String autor,
-    @NotBlank
+    
+    @NotNull
     Integer curso, 
     @NotBlank
     String respostas) {

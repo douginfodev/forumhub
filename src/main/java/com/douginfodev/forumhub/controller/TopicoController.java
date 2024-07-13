@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.douginfodev.forumhub.domain.topicos.DadosAtualizacaoTopico;
+import com.douginfodev.forumhub.domain.topicos.DadosDetailsTopico;
+import com.douginfodev.forumhub.domain.topicos.DadosListagemTopico;
+import com.douginfodev.forumhub.domain.topicos.DadosTopico;
+import com.douginfodev.forumhub.domain.topicos.Topico;
 import com.douginfodev.forumhub.repository.TopicoRepository;
-import com.douginfodev.forumhub.topicos.DadosAtualizacaoTopico;
-import com.douginfodev.forumhub.topicos.DadosDetailsTopico;
-import com.douginfodev.forumhub.topicos.DadosListagemTopico;
-import com.douginfodev.forumhub.topicos.DadosTopico;
-import com.douginfodev.forumhub.topicos.Topico;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -39,7 +39,7 @@ public class TopicoController {
        var topico = new Topico(dados);
        repository.save(topico);
 
-        var uri = uriBuilder.path("/topico/{id}").buildAndExpand(topico.getId()).toUri();
+        var uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new DadosDetailsTopico(topico));
     }
@@ -51,7 +51,7 @@ public class TopicoController {
         return  ResponseEntity.ok(pageDados);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @Transactional
     public ResponseEntity Update(@RequestBody @Valid DadosAtualizacaoTopico dados) {
        var topico = repository.getReferenceById(dados.id());

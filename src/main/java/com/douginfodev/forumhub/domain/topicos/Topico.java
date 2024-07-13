@@ -1,4 +1,4 @@
-package com.douginfodev.forumhub.topicos;
+package com.douginfodev.forumhub.domain.topicos;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -48,7 +48,7 @@ public class Topico {
         
         this.datatopico = dados.datatopico();
         this.statustopico = dados.statustopico();
-        this.autor = dados.autor();
+        this.autor = dados.autor();        
     }
 
 

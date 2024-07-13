@@ -26,8 +26,7 @@ public class ErrorExceptions {
     private record DadosValidation(String campo, String mensagem){
         public DadosValidation(FieldError error){
             this(error.getField(), error.getDefaultMessage());
-        }
-        
+        }     
         
     }
 }

@@ -1,4 +1,4 @@
-package com.douginfodev.forumhub.topicos;
+package com.douginfodev.forumhub.domain.topicos;
 
 public record DadosDetailsTopico(
     Integer id, 
