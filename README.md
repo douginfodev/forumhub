@@ -49,3 +49,11 @@ create table topicos{
 
   primary key(id)
 };
+
+
+CREATE TABLE springforumweb.usuarios (
+	id int(3) auto_increment NOT null primary key,
+    login varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+	senha varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+);
+
