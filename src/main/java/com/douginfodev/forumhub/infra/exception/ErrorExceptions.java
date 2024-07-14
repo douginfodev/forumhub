@@ -1,4 +1,4 @@
-package com.douginfodev.forumhub.infra;
+package com.douginfodev.forumhub.infra.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
