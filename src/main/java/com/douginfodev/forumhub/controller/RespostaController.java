@@ -35,18 +35,18 @@ public class RespostaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity Insert(@RequestBody @Valid DadosRespota dados, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity Insert(@RequestBody @Valid DadosResposta dados, UriComponentsBuilder uriBuilder) {
        var reposta = new Resposta(dados);
        repository.save(reposta);
 
-        var uri = uriBuilder.path("/respostas/{id}").buildAndExpand(resposta.getId()).toUri();
+        var uri = uriBuilder.path("/respostas/{id}").buildAndExpand(reposta.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosDetailsResposta(resposta));
+        return ResponseEntity.created(uri).body(new DadosDetailsResposta(reposta));
     }
 
     //topicos?sort=titulo,desc&size=10&page=0
     @GetMapping
-    public ResponseEntity<Page<DadosListagemTopico>> ListAll(@PageableDefault(size = 10, sort = { "datatopico" }) Pageable paginacao) {
+    public ResponseEntity<Page<DadosListagemResposta>> ListAll(@PageableDefault(size = 10, sort = { "dataresposta" }) Pageable paginacao) {
         var pageDados = repository.findAll(paginacao).map(DadosListagemResposta::new);
         return  ResponseEntity.ok(pageDados);
     }
@@ -54,10 +54,10 @@ public class RespostaController {
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity Update(@RequestBody @Valid DadosAtualizacaoResposta dados) {
-       var topico = repository.getReferenceById(dados.id());
-       topico.atualizarResposta(dados);
+       var reposta = repository.getReferenceById(dados.id());
+       reposta.atualizarResposta(dados);
 
-       return ResponseEntity.ok(new DadosDetailsResposta(resposta));
+       return ResponseEntity.ok(new DadosDetailsResposta(reposta));
     }
 
     @DeleteMapping("/{id}")
@@ -70,9 +70,9 @@ public class RespostaController {
 
     @GetMapping("/{id}")
     public ResponseEntity details(@PathVariable Integer id) {
-       var resposta = repository.getReferenceById(id);
+       var reposta = repository.getReferenceById(id);
 
-       return ResponseEntity.ok(new DadosDetailsResposta(resposta));
+       return ResponseEntity.ok(new DadosDetailsResposta(reposta));
    
     }
 
