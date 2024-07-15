@@ -1,59 +1,26 @@
-# forumhub
-Challenge 03 - ONE - Oracle Next Education
+# FORUM HUB ALURA - CHALLENGE 03 - One - Oracle Next Education
 
-        <dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-mysql</artifactId>
-		</dependency>
+## Sobre o projeto
+O FórumHub é uma API REST desenvolvida em Java utilizando Spring Boot, que simula um fórum de discussão. Nesta API, os usuários podem criar, visualizar, atualizar e deletar tópicos de discussão, perfis, respostas, cursos e usuários. A partir de agora, apenas usuários autenticados podem interagir com a API. Este projeto é parte do desafio Challenge Back End.
 
+## Funcionalidades / Rotas
 
-        @Configuration
-public class CorsConfiguration implements WebMvcConfigurer {
+### Topico
+<span style="color:lime>;">VERBO POST: Criação de Tópico.
+http://localhost:2500/topico
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-            .allowedOrigins("http://localhost:3000")
-            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
-    }
-}
+<span style="color:yellow;">VERBO GET: Listar todos Tópicos
+http://localhost:2500/topico
 
-server.port=2500
-spring.application.name=forumhub
-spring.datasource.url=jdbc:postgresql://localhost:5432/one_literalura
-spring.datasource.username=postgres
-spring.datasource.password=root
-spring.datasource.driver-class-name=org.postgresql.Driver
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.HSQLDialect
+<span style="color:yellow;">VERBO GET: Detalhamento de um Tópico pelo id.
+http://localhost:2500/topico/1
 
-traduzir os parametros da paginacao
-spring.data.web.pageable.page-parameter=pagina
-spring.data.web.pageable.size-parameter=tamanho
-spring.data.web.sort.sort-parameter=ordem
+<span style="color:blue;">VERBO PUT: Atualizar tópico.
+http://localhost:2500/topico/1
 
-server.error.include-stacktrace=never
+<span style="color:red;">VERBO DELETE</span>: Exclução Lógica de um tópico pelo id.
+http://localhost:2500/topico/1
 
-create table topicos{
-  id int(11) not null auto_increment,
-  titulo varchar(100) not null,
-  mensagem varchar(250) not null,
-  datatopico varchar(10) not null,
-  statustopico varchar(10) not null,
-  autor int(3) not null,
-  curso varchar(50) not null,
-  respostas varchar(250) not null,
-
-  primary key(id)
-};
-
-
-CREATE TABLE springforumweb.usuarios (
-	id int(3) auto_increment NOT null primary key,
-    login varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	senha varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-);
-
+### Usuario
+POST: Criação de usuário autorizado a acessar a API.
+http://localhost:2500/login
