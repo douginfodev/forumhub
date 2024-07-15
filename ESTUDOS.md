@@ -56,9 +56,8 @@ create table respostas{
   mensagem varchar(250) not null,
   topico int(11) not null,
   dataresposta varchar(10) not null,
-  statustopico varchar(10) not null,
   autor int(3) not null,
-  solucao varchar(250) not null,
+  resposta varchar(250) not null,
 
   primary key(id)
 };
@@ -68,4 +67,13 @@ CREATE TABLE springforumweb.usuarios (
 	id int(3) auto_increment NOT null primary key,
     login varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
 	senha varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+);
+
+CREATE TABLE springforumweb.respostas (
+	id int(11) auto_increment NOT null primary key,
+    mensagem varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+    topico int(11) NOT NULL,
+    dataresposta varchar(10) NOT NULL,
+    autor int(11) NOT NULL,
+	resposta varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 );
