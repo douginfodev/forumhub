@@ -34,8 +34,8 @@ http://localhost:2500/topico/1
 POST: Criação de usuário autorizado a acessar a API.
 http://localhost:2500/login
 
-## MODELAGEM DE DADOS
-<img src="img/bancofh.jpg"alt="modelo de dados">
+## BANCO DE DADOS
+<img src="https://github.com/douginfodev/forumhub/blob/main/img/bancofh.jpg" alt="modelo de dados">
 
 ## FERRAMENTAS
 * spring boot
